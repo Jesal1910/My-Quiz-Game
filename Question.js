@@ -10,6 +10,7 @@ class Question {
     this.option2 = createElement('h4');
     this.option3 = createElement('h4');
     this.option4 = createElement('h4');
+    this.reset = createButton('Reset');
   }
 
   hide(){
@@ -33,6 +34,10 @@ class Question {
     this.option3.position(150, 140);
     this.option4.html("4: Example" );
     this.option4.position(150, 160);
+    this.reset.position(750, 350);
+    this.reset.style('width', '100px');
+    this.reset.style('height', '30px');
+    this.reset.style('background', 'lightpink');
 
     this.input1.position(150, 230);
     this.input2.position(350, 230);
@@ -50,5 +55,13 @@ class Question {
       contestant.update();
       contestant.updateCount(contestantCount);
     });
+
+    this.reset.mousePressed(() => {
+      contestant.updateCount(0);
+      quiz.update(0);
+      var contestantInfoRef = database.ref('contestants');
+      contestantInfoRef.remove();
+     });
+
   }
 }
